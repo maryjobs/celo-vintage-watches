@@ -4,4 +4,3 @@ This dapp allows anyone to upload their vintage watch and for other people to bu
 
 # Demo
 
-https://musical-cajeta-179dd2.netlify.app
