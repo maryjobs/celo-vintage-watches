@@ -1,7 +1,7 @@
-# Clo Vintage Watch Marketplace
+# Celo Vintage Watch Marketplace
 
 This dapp allows anyone to upload their vintage watch and for other people to buy the watch. owners of a watch can change the description, price and can also remove the watch from the marketplace.
 
 # Demo
+https://admirable-brioche-1b8f68.netlify.app
 
-https://musical-cajeta-179dd2.netlify.app
