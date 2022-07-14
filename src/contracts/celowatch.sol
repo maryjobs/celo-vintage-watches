@@ -29,6 +29,11 @@ contract Celowatch {
 
     mapping (uint => Watch) internal watches;
 
+    modifier onlyOwner(uint _index){
+        require(msg.sender == watches[_index].owner, "Only the owner can access this function");
+        _;
+    }
+
 
 // adding a new watch to the marketplace
     function addWatch(
@@ -65,20 +70,17 @@ contract Celowatch {
     }
 
 // updating the description of a watch
-     function updateDescription(uint _index, string memory _description) external{
-        require(msg.sender == watches[_index].owner, "Only Owner");
+     function updateDescription(uint _index, string memory _description) external onlyOwner(_index){
         watches[_index].description = _description;
     }
 // updating the price of a watch
-    function updatePrice(uint _index, uint _price) external{
-        require(msg.sender == watches[_index].owner, "Only Owner");
+    function updatePrice(uint _index, uint _price) external onlyOwner(_index){
          require(_price > 0, "price must be above 0");
          watches[_index].price = _price;
     }
 
 // removing a watch from the mapping using the index
-    function removeWatch(uint _index) external {
-	        require(msg.sender == watches[_index].owner, "Only the owner delete watch");         
+    function removeWatch(uint _index) external onlyOwner(_index){         
             watches[_index] = watches[watchesLength - 1];
             delete watches[watchesLength - 1];
             watchesLength--; 
@@ -86,6 +88,7 @@ contract Celowatch {
 
 // buying a watch and transferring the ownership to the buyer
     function buyWatch(uint _index) public payable  {
+        require(msg.sender != watches[_index].owner, "You can't buy your watch");
         require(
           IERC20Token(cUsdTokenAddress).transferFrom(
             msg.sender,
